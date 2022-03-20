@@ -1,0 +1,16 @@
+.bg-main{
+    background-color: #fafafa;
+}
+.left-tab{
+    background-image: url('../images/LoginBackground.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.slider-img{
+    width: 98%;
+    height: 55%;
+}
+.slider-img img{
+    transform: translate(62%,37%);
+}

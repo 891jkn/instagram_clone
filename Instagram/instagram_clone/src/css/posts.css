@@ -1,0 +1,23 @@
+.hover-decoration:hover{
+    text-decoration: underline!important;
+}
+.text-time{
+    padding-top: 6px;
+    font-size: 10px;
+}
+.comment-input:focus{
+    border:none;
+    outline: none;
+    box-shadow: none;
+}
+.m-w-56{
+    max-width: 56px!important;
+}
+.preview-album img:hover{
+    transform: scale(1.2);
+    z-index: 999;
+    transition: 0.2s ease;
+}
+.preview-album{
+    transition: 0.2s ease;
+}

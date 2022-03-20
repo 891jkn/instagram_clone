@@ -1,0 +1,14 @@
+.Main{
+    padding: 3rem 12% 3rem 12.9%;
+    height: 90vh;
+    overflow-y:hidden;
+}
+@media (max-width:576px) {
+    .Main{
+        padding: 2rem 0;
+    }
+    
+}
+*:not(.fa-solid,.fa-regular,.fa-brands){
+    font-family: 'Nunito'!important;
+}

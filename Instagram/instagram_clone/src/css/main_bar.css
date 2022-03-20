@@ -1,0 +1,25 @@
+.main-bar{
+    overflow: scroll;
+    height: 100vh;
+    padding-bottom: 20%;
+}
+.main-bar .content{
+    height: fit-content;
+}
+.main-bar::-webkit-scrollbar{
+    width: 0;
+}
+/* Track */
+.main-bar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+.main-bar::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+.main-bar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }

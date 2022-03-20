@@ -1,0 +1,8 @@
+.bg-main{
+    background-color: #fafafa;
+}
+.border-custom{
+    border:2px solid;
+    border-color: gray;
+    cursor: pointer;
+}
