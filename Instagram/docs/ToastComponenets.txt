@@ -1,0 +1,26 @@
+Hi!
+- InforToast lÃa 1 component de hien thi info chung nhu la popup 
+
+- co 3 tham so :
+1.userid -> de call api lay info 
+2.tham so hidden -> co hien thi hay khong
+cach dung : 
+
+
+userId : default = null
+hidden : default = null
+// import 
+import InfoToast from ....
+
+// khai bao state 
+const [toast,setToast] = useState(null)
+// bien kiem tra
+const isShow = false
+
+// ham chinh 
+onClick={()=>{
+	!isShow?setToast(<InfoToast hidden = ''/>):setToast(<InfoToast hidden 
+= 
+'hidden'/>)
+	
+}}
