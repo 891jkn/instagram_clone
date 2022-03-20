@@ -26,7 +26,7 @@ function SideBar() {
     return (
         <>
         <div className='flex justify-end flex-col md:p-0 lg:pl-8'>
-            <InforBar userInfo = {infoBarProps}/>   
+            <InforBar userInfo = {infoBarProps} switchAccount={true}/>   
             {/* suggestions follow */}
             <SuggestionFollow/>
         </div>

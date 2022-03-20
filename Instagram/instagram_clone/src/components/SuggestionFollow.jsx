@@ -1,6 +1,7 @@
 import React from 'react'
 import userimg from '../images/user.png'
 import InforBar from './InforBar'
+import InfoToast from './ToastInfo'
 function SuggestionFollow() {
     let infoBarProps = {
         username:{
@@ -31,7 +32,7 @@ function SuggestionFollow() {
             {listSuggestion.map((val,index)=>{
                 return (
                     <li key={index}>
-                        <InforBar userInfo={infoBarProps}/>
+                        <InforBar userInfo={infoBarProps} toastInfo={true}/>
                     </li>
                 )
             })}

@@ -5,7 +5,7 @@ const InfoToast = ({userId = null,hidden})=>{
     if(userId!==null){
       return (
         <>
-          <div className={`w-96 h-fit absolute top-5 left-0 ${hidden}  bg-white border rounded`}>
+          <div className={`w-96 h-fit absolute top-5 left-0 ${hidden}  z-10 bg-white border rounded`}>
               <div className="flex flex-row space-x-5 items-center py-5  px-5">
                 <div className="basis-1/5">
                   <img src={user} className='m-w-56 rounded-circle' alt="" />

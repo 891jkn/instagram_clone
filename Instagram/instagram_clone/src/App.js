@@ -19,9 +19,9 @@ function App() {
       <div className='App'>
         <Routes>
           <Route path='/' element={
-            <Authenticate>
+            // <Authenticate>
                 <Main/>
-             </Authenticate>
+            //  </Authenticate>
           }></Route>
           <Route path='/Login' element={
             <Login/>
