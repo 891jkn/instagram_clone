@@ -12,7 +12,8 @@ app.use(bodyParser.urlencoded({extended:true,limit:'30mb'}))
 // tat ca cac route ko register se ko nhan duoc
 app.use(cors())
 
-// db connection
+
+// register account route
 app.use('/Account',AccountRoute)
 
 // connect to database 
