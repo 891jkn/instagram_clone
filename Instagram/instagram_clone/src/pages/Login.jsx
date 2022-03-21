@@ -10,8 +10,8 @@ import {useEffect,useState} from 'react'
 import '../css/login.css'
 import Alert from '../components/Alert'
 function ValidForm ( props ){
-  let emailRex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  if(emailRex.test(props.email) && props.password.length >= 8) return true
+
+  if( props.password.length >= 8) return true
   return false;
 }
 async function handleLogin(self,props){
@@ -73,19 +73,19 @@ function Login() {
                   <img src={logo} className='w-44 mt-0 mb-10 mx-auto'/>
                   <div className='h-fit'>
                     <form className='space-y-3 2xl:space-y-6 ' onSubmit={async (e)=>{
-                      let props = {
-                        email:email,
-                        password:password
-                      }
-                      let result = await handleLogin(e,props)
-                      console.log(result)
-                      if(result.login){
-                        window.localStorage.setItem('instagram_user_id',result.data)
-                        navigate('/')
-                      }else{
-                        alert(result.err)
-                        
-                      }
+                        let props = {
+                          email:email,
+                          password:password
+                        }
+                        let result = await handleLogin(e,props)
+                        console.log(result)
+                        if(result.login){
+                          window.localStorage.setItem('instagram_user_id',result.data)
+                          navigate('/')
+                        }else{
+                          alert(result.err)
+                          
+                        }
                     }}>
                         <input type={'email'} className='text-xs px-2 w-full h-9 bg-main  border' placeholder='E-mail' onChange={(e)=>{setEmail(e.target.value)}}/>
                         <br></br>
