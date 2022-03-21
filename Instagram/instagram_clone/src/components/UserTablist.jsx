@@ -69,11 +69,11 @@ export default function UserTablist() {
             <div className="user__overlay  bg-black opacity-60">
               <div className="user__icon flex justify-center items-center">
                 <div className="  user__icon-heart">
-                  <i class="fa-solid fa-heart"></i>
+                  <i class="fa-solid fa-heart"></i> &nbsp;
                   {item.heart}
                 </div>
                 <div className="  user__icon-comment">
-                  <i class="fa-solid fa-comment"></i>
+                  <i class="fa-solid fa-comment"></i> &nbsp;
                   {item.comment}
                 </div>
               </div>

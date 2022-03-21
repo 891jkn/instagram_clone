@@ -30,7 +30,7 @@ class Navbar extends React.Component {
         <div className="navbar sticky top-0 z-50">
           <div className="container navbar-container mx-auto">
             <div className="flex flex-row py-3 w-full items-center">
-              <a className="navbar-brand flex-auto">
+              <a className="navbar-brand flex-auto" href="/">
                 <img src={logo} className="logo md:mr-auto" />
               </a>
               <div className="flex-auto sm:hidden md:block lg:block px-2">
