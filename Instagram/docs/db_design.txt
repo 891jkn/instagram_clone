@@ -1,0 +1,25 @@
+posts :
+- id:string
+- caption:string
+- userId:string
+- mediaId:string
+
+
+likes : 
+postId :string
+count : number
+
+comments : 
+id : string
+count: number
+postId : string
+content : string
+parentId : string
+
+
+- media :
+id :string
+path :string
+type :number
+
+ 
