@@ -9,6 +9,10 @@ const ImagePost = (post) => {
   const [infoToast, setInfoToast] = useState(
     <InfoToast userId={1} hidden="hidden" />
   );
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  console.log("po", showPopup);
+
   const countComment = undefined;
   return (
     <div className="post border bg-white">
@@ -30,10 +34,53 @@ const ImagePost = (post) => {
             missingvivian {infoToast}
           </a>
         </div>
+
         <div>
-          <i className="fa-solid fa-ellipsis cursor-pointer"></i>
+          <i
+            className="fa-solid fa-ellipsis cursor-pointer "
+            onClick={() => {
+              setShowOverlay(!showOverlay);
+              setShowPopup(!showPopup);
+            }}
+          ></i>
         </div>
       </div>
+      <ul
+        className={`post__popup ${showOverlay ?"show-popup" : "hide-popup"} `}
+      >
+        <li>
+          <a href="/">Report</a>
+        </li>
+        <li>
+          <a href="/">Unfollow</a>
+        </li>
+        <li>
+          <a href="/">Go to post</a>
+        </li>
+        <li>
+          <a href="/">Tagged accounts</a>
+        </li>
+        <li>
+          <a href="/">Share to...</a>
+        </li>
+        <li>
+          <a href="/">Copy link</a>
+        </li>
+        <li>
+          <a href="/">Embed</a>
+        </li>
+        <li>
+          <a href="/">Cancel</a>
+        </li>
+      </ul>
+      <div
+        className={`bg-overlay ${
+          showOverlay ? "show-overlay" : "hide-overlay"
+        }`}
+        onClick={() => {
+          setShowOverlay(!showOverlay);
+        }}
+      ></div>
       {/* post image */}
       <div>
         <img
