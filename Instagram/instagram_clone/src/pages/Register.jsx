@@ -11,19 +11,16 @@ import '../css/login.css'
 import Alert from '../components/Alert'
 async function handleRegister(self,props){
   self.preventDefault();
-  if(await ValidForm(props)){
+  if(ValidForm(props)){
     return await RegisterAPI({email:props.email,userName:props.userName,password:props.password})
   }
-  return false;
+  return  {err:'Password not match'};
 }
-async function ValidForm (props){
-  let emailRex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  if(emailRex.test(props.email) && props.userName.trim()!=='' && props.password.trim()!=='' && props.re_password.trim()!==''){
-    if(props.password==props.re_password){
+function ValidForm (props){
+  if(props.userName.trim()!=='' && props.password.trim()!=='' && props.re_password.trim()!=='' && props.password==props.re_password){
       return true;
-    }
   }
-  return false;
+  return false
 }
 function Register() {
   const [sliderBg,setSliderBg] = useState(loginsl)

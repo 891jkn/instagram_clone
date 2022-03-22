@@ -31,7 +31,7 @@ function InforBar({userInfo,toastInfo = false,switchAccount = false}) {
                     <img src={defaultuserimg} className={`w-${userInfo.img.width}`}/>
                 </div>
                 <div className=''>
-                    <strong className={`text-${userInfo.username.font_size} font-${userInfo.username.font_weight} text-${userInfo.username.font_color} relative`} onMouseEnter={
+                    <strong className={`cursor-pointer text-${userInfo.username.font_size} font-${userInfo.username.font_weight} text-${userInfo.username.font_color} relative`} onMouseEnter={
                         ()=>{
                             setTimeout(()=>{
                                 if(toastInfo){
@@ -44,7 +44,7 @@ function InforBar({userInfo,toastInfo = false,switchAccount = false}) {
                     }}>{user.username}
                     {Toast}
                     </strong>
-                    <p className={`text-${userInfo.nickname.font_size} font-${userInfo.nickname.font_weight} text-${userInfo.nickname.font_color}`}>{user.nickname}</p>
+                    <p className={`text-${userInfo.nickname.font_size} font-${userInfo.nickname.font_weight} text-${userInfo.nickname.font_color} cursor-pointer`}>{user.nickname}</p>
                 </div>
                 <div className='text-right flex-auto'>
                     <a className='text-blue-400 text-xs font-semibold hover:cursor-pointer' onClick={()=>{

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-
+import sha256 from 'crypto-js/sha256.js'
 const Schema = mongoose.Schema({
     email:{
         type:String,
@@ -30,4 +30,16 @@ const Schema = mongoose.Schema({
         default:false
     },
 },{timestamps:true})
+
+Schema.method.setPassword = (password)=>{
+    this.password = sha256(password)
+}
+
+Schema.method.validPassword = (password)=>{
+    var hash = sha256(password)
+    return this.password == hash
+}
+
+
 export const UserModel = mongoose.model('Users',Schema);
+

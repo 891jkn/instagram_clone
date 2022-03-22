@@ -20,9 +20,9 @@ function App() {
       <div className='App'>
         <Routes>
           <Route path='/' element={
-            // <Authenticate>
-            <Main />
-          //  </Authenticate>
+            <Authenticate>
+                <Main/>
+              </Authenticate>
           }></Route>
           <Route path="user" element={<User />} />
           <Route path='/Login' element={

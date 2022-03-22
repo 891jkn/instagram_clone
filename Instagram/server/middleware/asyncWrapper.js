@@ -1,7 +1,11 @@
-export const  AsyncWrapper =  async (callback) => {
-    try{
-        callback()
-    }catch(err){
-        return err;
-    }
+export const AsyncWrapper = (callback)=>{
+    return new Promise((res)=>{
+        try{
+            res(callback)
+        }catch(err){
+            res(err)
+        }
+    }).catch(err=>err)
 }
+
+
