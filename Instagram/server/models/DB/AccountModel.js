@@ -3,7 +3,7 @@ import { AsyncWrapper } from "../../middleware/asyncWrapper.js";
 import {Harsher,Valid} from '../../helpers/Harsher.js'
 const UserLogin = async({email,password})=>{
     try{
-        let user = UserModel.findOne({email:email,account_state:1}).exec()
+        let user  = await UserModel.findOne({email:email,account_state:1}).exec()
         if(user !== null && user !== undefined){
             return Valid(user.password,password) ? {login:true,data:user._id} : {login:false,err:'password incorrect'};
         }
