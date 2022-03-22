@@ -11,7 +11,6 @@ const ImagePost = (post) => {
   );
   const [showOverlay, setShowOverlay] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  console.log("po", showPopup);
 
   const countComment = undefined;
   return (
@@ -46,7 +45,7 @@ const ImagePost = (post) => {
         </div>
       </div>
       <ul
-        className={`post__popup ${showOverlay ?"show-popup" : "hide-popup"} `}
+        className={`post__popup ${showOverlay ? "show-popup" : "hide-popup"} `}
       >
         <li>
           <a href="/">Report</a>
