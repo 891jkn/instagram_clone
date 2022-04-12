@@ -24,11 +24,10 @@ const UserRegister = async ({email,userName,password})=>{
         // check user 
         const isHasUser = await HasUser(email);
         if(isHasUser){
-            console.log(email,userName,password)
            
             let new_user = new UserModel({
                 email:email,
-                userName:userName,
+                user_name:userName,
                 account_state:1,
                 active:false
             })

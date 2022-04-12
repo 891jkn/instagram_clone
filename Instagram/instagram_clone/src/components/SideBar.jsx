@@ -21,14 +21,15 @@ function SideBar() {
         },
         option:{
             link:'Switch'
-        }
+        },
+        id:localStorage.getItem('instagram_user_id') || null
     }
     return (
         <>
         <div className='flex justify-end flex-col md:p-0 lg:pl-8'>
             <InforBar userInfo = {infoBarProps} switchAccount={true}/>   
             {/* suggestions follow */}
-            <SuggestionFollow/>
+            {/* <SuggestionFollow/> */}
         </div>
         </>
     )

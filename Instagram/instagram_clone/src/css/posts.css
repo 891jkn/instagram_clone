@@ -5,6 +5,9 @@
   padding-top: 6px;
   font-size: 10px;
 }
+.disabled {
+  cursor: not-allowed;
+}
 .comment-input:focus {
   border: none;
   outline: none;
@@ -23,9 +26,9 @@
 }
 .post__popup {
   width: 400px;
-  position: absolute;
-  top: 50%;
+  position: fixed;
   left: 50%;
+  top:50%;
   transform: translate(-50%, -50%);
   z-index: 2;
   background-color: #fff;
@@ -63,4 +66,8 @@ li:nth-child(2) {
   .post__popup {
     width: 290px;
   }
+}
+.liked{
+  color: #ed4956;
+  animation:liked 200ms 1 
 }

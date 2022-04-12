@@ -19,3 +19,6 @@ code {
 .bg-main{
   background-color: #fafafa;
 }
+.hidden-control{
+  display: none!important;
+}

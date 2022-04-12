@@ -9,6 +9,11 @@ const Schema = mongoose.Schema({
     friendId :{
         type:String,
         require:true
+    },
+    InteractiveCount:{
+        type:Number,
+        require:true,
+        default:0
     }
-})
+},{timestamps:true})
 export const FriendModel = mongoose.model('Friends',Schema)

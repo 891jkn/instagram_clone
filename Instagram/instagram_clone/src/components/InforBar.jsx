@@ -2,28 +2,17 @@ import React, { useEffect, useState } from 'react'
 import defaultuserimg from '../images/user.png'
 import { useNavigate } from 'react-router-dom'
 import InfoToast from './ToastInfo'
+import { useSelector,useDispatch } from "react-redux";
 function handleLogout (){
     window.localStorage.removeItem('instagram_user_id')
     return true;
 }
 function InforBar({userInfo,toastInfo = false,switchAccount = false}) {
-    const navigate = useNavigate()
-    // default user
-    let user = {
-        username:'Dang Duy Khanh',
-        nickname:'Jack',
-        age:18,
-        loginname:'dangkhanh',
-        email:"dangk13122002@gmail.com",
-        password:'13122002'
-    }
-
-    if(userInfo.user !== undefined){
-        console.log('change user')
-        user = userInfo.user
-    }
-    //  import toast
     let [Toast,setToast] = useState(null)
+    
+    const homeReducer = useSelector((state)=>state.homeReducer)
+    console.log(homeReducer)
+    const navigate = useNavigate()
     return (
         <>
             <div className='flex flex-row items-center py-2 space-x-5'>
@@ -41,10 +30,11 @@ function InforBar({userInfo,toastInfo = false,switchAccount = false}) {
                         }
                     } onMouseLeave={()=>{
                         setToast(<InfoToast userId={1} hidden='hidden'/>)
-                    }}>{user.username}
+                        
+                    }}>{homeReducer.values.user!==null?homeReducer.values.user.user_name:'anonymous'}
                     {Toast}
                     </strong>
-                    <p className={`text-${userInfo.nickname.font_size} font-${userInfo.nickname.font_weight} text-${userInfo.nickname.font_color} cursor-pointer`}>{user.nickname}</p>
+                    <p className={`text-${userInfo.nickname.font_size} font-${userInfo.nickname.font_weight} text-${userInfo.nickname.font_color} cursor-pointer`}>{homeReducer.values.user!==null?homeReducer.values.user.user_name:'anonymous'}</p>
                 </div>
                 <div className='text-right flex-auto'>
                     <a className='text-blue-400 text-xs font-semibold hover:cursor-pointer' onClick={()=>{
