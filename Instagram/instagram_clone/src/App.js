@@ -3,6 +3,7 @@ import Main from './pages/Main'
 import Navbar from './components/Navbar'
 import Login from './pages/Login';
 import User from "./components/User"
+import Test from './pages/test';
 import { Navigate } from 'react-router-dom'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Register from './pages/Register';
@@ -28,6 +29,7 @@ function App() {
           <Route path='/Login' element={
             <Login />
           }></Route>
+          <Route path='/test' element={<Test/>}></Route>
           <Route path='/Register' element={
             <Register />
           }></Route>

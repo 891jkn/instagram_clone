@@ -57,7 +57,6 @@ function Login() {
   },[])
   return (
       <>
-
         <div className='w-100 h-fit flex bg-main justify-center items-center'>
           <div className='login-box  w-full md:w-full xl:w-2/3 px-0 sm:px-14 flex my-0 h-fit justify-center'>
             <div className='w-1/2 hidden md:block lg:block'>

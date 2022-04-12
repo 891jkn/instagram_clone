@@ -8,6 +8,7 @@ const Schema = mongoose.Schema({
     path:{
         type:String,
         require:true
-    }
+    },
+    postId:{type:String,require:true}
 },{timestamps:true})
 export const MediaModel = mongoose.model('Medias',Schema)

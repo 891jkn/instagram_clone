@@ -1,7 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore,getDefaultMiddleware } from '@reduxjs/toolkit'
 import defaultReducer from '../features/default'
+import createPostReducer from '../features/createPost'
+import HomeReducer from '../features/HomeReducer'
+import SearchReducer from  '../features/SearchReducer'
 export default configureStore({
   reducer: {
-      default:defaultReducer
-  },
+      default:defaultReducer,
+      createPoster : createPostReducer,
+      homeReducer:HomeReducer,
+      searchReducer:SearchReducer
+  }
 })

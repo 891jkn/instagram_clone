@@ -1,7 +1,7 @@
 export const AsyncWrapper = (callback)=>{
-    return new Promise((res)=>{
+    return new Promise(async(res)=>{
         try{
-            res(callback)
+            await res(callback)
         }catch(err){
             res(err)
         }

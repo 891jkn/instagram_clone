@@ -12,10 +12,5 @@ const Schema = mongoose.Schema({
         type:String,
         require:true
     },
-    mediaId:{
-        type:String,
-        require:false,
-    },
-
 },{timestamps:true})
 export const PostModel = mongoose.model('Posts',Schema)

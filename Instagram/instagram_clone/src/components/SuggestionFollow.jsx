@@ -32,7 +32,7 @@ function SuggestionFollow() {
             {listSuggestion.map((val,index)=>{
                 return (
                     <li key={index}>
-                        <InforBar userInfo={infoBarProps} toastInfo={true}/>
+                        <InforBar userInfo={{...infoBarProps,id:val}}  toastInfo={true}/>
                     </li>
                 )
             })}

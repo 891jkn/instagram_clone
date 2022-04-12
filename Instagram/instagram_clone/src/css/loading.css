@@ -1,0 +1,30 @@
+.spinner-container{
+    position:fixed;
+    width:39px;
+    height:39px;
+    border-radius: 50%;
+    background-color:white;
+    top:50%;
+    left: 50%;
+    transform:translate(-50%,-50%)
+}
+/* .spinner-container .spinner{
+    width: 36px;
+    height:36px;
+    position: absolute;
+    border-radius: 50%;
+    top:50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+    border-top: 3px solid black;
+    animation:spinner 500ms infinite
+} */
+@keyframes spinner {
+    from{
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+    to{
+        transform: translate(-50%,-50%) rotate(360deg);
+
+    }
+}

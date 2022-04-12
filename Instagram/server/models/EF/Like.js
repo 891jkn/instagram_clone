@@ -11,10 +11,10 @@ const Schema = mongoose.Schema({
         require:true
     },
     isLike:{
-        type:Number,
+        type:Boolean,
         require:true,
-        default:0 // 0 is unlike , 1is like
-    }
+        default:true // 0 is unlike , 1is like
+    },
 },{timestamps:true})
 
 export const LikeModel = mongoose.model('Likes',Schema)
