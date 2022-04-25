@@ -1,4 +1,4 @@
-import { GetPostsOfFriend ,Create,GetAll} from "../models/DB/PostModel.js";
+import { GetPostsOfFriend ,Create,GetAll, GetPostByPage} from "../models/DB/PostModel.js";
 import { CreatePostComment } from "../models/DB/CommentModel.js";
 import { LikePost,UnlikePost} from "../models/DB/LikeModel.js";
 export const GetFriendPosts = async (req,res)=>{
@@ -17,8 +17,9 @@ export const CreateNewPost = async (req,res)=>{
 }
 
 export const GetAllPost = async(req,res)=>{
-    const userId = req.body.userId
-    res.send(await GetAll(userId))
+    const [userId,page] = [req.body.userId,req.body.page]
+    let limit = 6;
+    res.send(await GetPostByPage(userId,page,limit))
 }
 
 export const Like = async(req,res)=>{

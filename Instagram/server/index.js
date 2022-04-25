@@ -8,6 +8,8 @@ const PORT = process.env.PORT || 5000
 import AccountRoute from './routes/Account.js'
 import PostRoute from './routes/Post.js'
 import SearchRoute from './routes/Search.js'
+import UserRoute from './routes/User.js'
+import FriendRoute from './routes/Friend.js'
 // gioi han server truyen tai khoang 30mb
 app.use(bodyParser.json({limit:"30mb"}))
 app.use(bodyParser.urlencoded({extended:true,limit:'30mb'}))
@@ -18,6 +20,8 @@ app.use(cors())
 app.use('/Account',AccountRoute)
 app.use('/post',PostRoute)
 app.use('/search',SearchRoute)
+app.use('/user',UserRoute)
+app.use('/friend',FriendRoute)
 // connect to database 
 
 const uri = 'mongodb+srv://khanhdaica:13122002@cluster0.eqs73.mongodb.net/instagram_clone?retryWrites=true&w=majority'

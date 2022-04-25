@@ -6,6 +6,16 @@ const Schema = mongoose.Schema({
         require:true,
         default:'user@gmail.com'
     },
+    slogan:{
+        type:String,
+        require:true,
+        default:'Follow me!'
+    },
+    nick_name:{
+        type:String,
+        require:true,
+        default:"default"
+    },
     password:{
         type:String,
         require:true,

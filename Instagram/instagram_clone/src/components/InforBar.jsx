@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import defaultuserimg from '../images/user.png'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import InfoToast from './ToastInfo'
 import { useSelector,useDispatch } from "react-redux";
 function handleLogout (){
@@ -9,9 +9,7 @@ function handleLogout (){
 }
 function InforBar({userInfo,toastInfo = false,switchAccount = false}) {
     let [Toast,setToast] = useState(null)
-    
     const homeReducer = useSelector((state)=>state.homeReducer)
-    console.log(homeReducer)
     const navigate = useNavigate()
     return (
         <>
@@ -31,10 +29,14 @@ function InforBar({userInfo,toastInfo = false,switchAccount = false}) {
                     } onMouseLeave={()=>{
                         setToast(<InfoToast userId={1} hidden='hidden'/>)
                         
-                    }}>{homeReducer.values.user!==null?homeReducer.values.user.user_name:'anonymous'}
+                    }}>
+                        <Link to={`/user/${homeReducer.values.user.id}`}>
+                            {homeReducer.values.user!==null?homeReducer.values.user.user_name:'anonymous'}
+                        </Link>
+                        
                     {Toast}
                     </strong>
-                    <p className={`text-${userInfo.nickname.font_size} font-${userInfo.nickname.font_weight} text-${userInfo.nickname.font_color} cursor-pointer`}>{homeReducer.values.user!==null?homeReducer.values.user.user_name:'anonymous'}</p>
+                    <p className={`text-${userInfo.nickname.font_size} font-${userInfo.nickname.font_weight} text-${userInfo.nickname.font_color} cursor-pointer`}>{homeReducer.values.user!==null?homeReducer.values.user.nickname:'anonymous'}</p>
                 </div>
                 <div className='text-right flex-auto'>
                     <a className='text-blue-400 text-xs font-semibold hover:cursor-pointer' onClick={()=>{
