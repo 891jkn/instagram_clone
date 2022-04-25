@@ -7,8 +7,8 @@ export const createPostAPI = async(post)=>{
         return res.data
     }).catch(err=>err)
 }
-export const GetAllPost = async(userId)=>{
-    return await axios.post(`${URL}/post/getAll`,{userId:userId}).then((res)=>{
+export const GetAllPost = async(userId,page)=>{
+    return await axios.post(`${URL}/post/getAll`,{userId:userId,page:page}).then((res)=>{
         return res.data
     }).catch(err=>err)
 }

@@ -4,6 +4,7 @@ import defaultUserAvatar from "../images/user.png";
 import defaultImagePost from "../images/post_images/vivian_3_15_2020.jpg";
 import InfoToast from "./ToastInfo";
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const ImagePost = ({post}) => {
 
@@ -26,8 +27,13 @@ const ImagePost = ({post}) => {
       return (
         <div className="py-3 bg-white px-4 space-x-3 flex flex-row  justify-between items-center">
           <div className="space-x-3">
-            <img src={typeof user.avatar !== 'undefined' ? user.avatar : defaultUserAvatar} className="h-9 rounded-full inline cursor-pointer " />
-            <a
+            <Link to={`/user/${post.user.id}`}>
+              <img src={typeof user.avatar !== 'object' ? user.avatar : defaultUserAvatar} className="h-9 rounded-full inline cursor-pointer " />
+            </Link>
+            <Link to={`/user/${post.user.id}`}  className="text-sm font-semibold cursor-pointer relative">
+              {post.user?post.user.user_name:'anonymous'} 
+            </Link>
+            {/* <a
               className="text-sm font-semibold cursor-pointer relative"
               onMouseEnter={() => {
                 setTimeout(() => {
@@ -38,8 +44,8 @@ const ImagePost = ({post}) => {
                 setInfoToast(<InfoToast userId={1} hidden="hidden" />);
               }}
             >
-              {post.user?post.user.user_name:'anonymous'} 
-            </a>
+             
+            </a> */}
           </div>
   
           <div>

@@ -10,6 +10,22 @@ import { useSelector ,useDispatch}from "react-redux";
 import { SearchAPI } from "../API/SearchAPI";
 import {setResult} from '../features/SearchReducer'
 const Navbar =  ()=>{
+  const navItems = [
+    {id:1,content:'fa-house',to:'',handleClick:function(){setActive(1)}},
+    {id:2,content:'fa-comment-dots',to:'',handleClick:function(){setActive(2)}},
+    {id:3,content:'fa-square-plus',to:'',handleClick:function(){setActive(3);setOpenCreatePost(true)}},
+    {id:4,content:'fa-compass',to:'',handleClick:function(){setActive(4)}},
+    {id:5,content:'fa-heart',to:'',handleClick:function(){setActive(5)}},
+    {id:6,content:'fa-circle-user',to:`/user/${window.localStorage.getItem('instagram_user_id')}`,handleClick:function(){setActive(6)}}
+  ]
+  const NavLink = ({to,isActive,content,handleClick})=>{
+    return (
+      <Link to={to}>
+        <i onClick={handleClick} className={isActive?`fa-solid  ${content}`:`fa-regular ${content}`}></i>
+      </Link>
+    )
+  }
+  const [active,setActive] = useState(1)
   const [createPost,setOpenCreatePost] =  useState(false)
   const [searchActive,setSearchActive] = useState(false)
   const nav = useNavigate()
@@ -36,6 +52,9 @@ const Navbar =  ()=>{
       DIR(setResult([]))
     }
   }
+  useEffect(()=>{
+
+  },[active])
   document.addEventListener('click',handleCloseSearch)
   return (
     <>
@@ -63,7 +82,10 @@ const Navbar =  ()=>{
             </div>
             <div className="navbar-navigate flex-auto">
               <div className="flex space-x-6 justify-end">
-                <Link to="/">
+                {navItems.map((val,key)=>{
+                  return <NavLink to={val.to} isActive={val.id == active} content ={val.content} handleClick={val.handleClick} key={key}/>
+                })}
+                {/* <Link to="/">
                   <i className="fa-solid fa-house"></i>
                 </Link>
                 <Link to="/">
@@ -76,9 +98,9 @@ const Navbar =  ()=>{
                 <Link to="/">
                   <i className="fa-regular fa-heart"></i>
                 </Link>
-                <Link to="/user">
+                <Link to={`/user/${window.localStorage.getItem('instagram_user_id')}`}>
                   <i className="fa-regular fa-circle-user"></i>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>

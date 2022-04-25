@@ -25,7 +25,9 @@ function App() {
                 <Main/>
               </Authenticate>
           }></Route>
-          <Route path="user" element={<User />} />
+          <Route path="user">
+            <Route path=':userId' element={<User/>}></Route>
+          </Route>
           <Route path='/Login' element={
             <Login />
           }></Route>

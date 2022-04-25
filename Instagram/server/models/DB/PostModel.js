@@ -73,7 +73,65 @@ export const GetCountFriendsPosts = async (userId) =>{
 export const GetPages = async(total,limit)=>{
     return Math.ceil(total/limit)
 }
+export const GetPostByPage  = async (userId,page,limit)=>{
+    try{
+          // get following 
+        let followings = await FriendModel.find({userId:userId}).sort({InteractiveCount:-1}).skip((Math.ceil(Math.random() * page) - 1) * limit).limit(6).exec()
+        let postOfFollowings = []
+        if(followings.length > 0){
+            for(let i = 0 ; i< followings.length ;i++){
+                let posts = await PostModel.find({userId:followings[i].friendId}).skip((page-1)*limit).limit(limit).exec()
+                if(posts.length > 0){
+                    let postHasMedia = []
+                    for(let i = 0 ; i < posts.length ; i++){
+                        // get media each post
+                        let media = await MediaModel.findOne({relationId:'POST'+posts[i]._id.toString()}).exec()
+                        // get like count
+                        const likes = await LikeModel.find({postId:posts[i]._id,isLike:true}).count().exec()
+                        const hasLike = await LikeModel.findOne({postId:posts[i]._id.toString(),userId:userId,isLike:true}).exec()
+                        // get comment each post
+                        const commentsNoUser = await CommentModel.find({postId:posts[i]._id,parentId:0}).sort({createdAt:-1}).limit(3).exec()
+                        const comments = []
+                        const totalComment = await CommentModel.find({postId:posts[i]._id}).count().exec()
+                        for(let i = 0 ; i < commentsNoUser.length ; i++){
+                            let user =  await GetUserById(commentsNoUser[i].userId)
+                            let comment = {id:commentsNoUser[i]._id.toString(),content:commentsNoUser[i].content,parentId:commentsNoUser[i].parentId,user:user}
+                            comments.unshift(comment)
+                        }
+                        let postUser = await GetUserById(posts[i].userId)
+                        // create data return 
+                        let post = {
+                            caption:posts[i].caption,
+                            userId:posts[i].userId,
+                            _id:posts[i]._id.toString(),
+                            media:{
+                                _id:media._id.toString(),
+                                relationId:media.relationId,
+                                path:media.path
+                            },
+                            user:postUser,
+                            likes:likes,
+                            hasLike:hasLike !== null ? true : false,
+                            comments:comments,
+                            createdAt:posts[i].createdAt,
+                            updatedAt:posts[i].updatedAt,
+                            totalComment:totalComment
+                        }
+                        // push post
+                        postHasMedia.unshift(post)
+                    }
+                    postOfFollowings.push(...postHasMedia)
+                }
+            }
+        }
+        return postOfFollowings;
+    }catch(err){
+        console.log(err)
+        return "Something err"
+    }
+  
 
+}
 export const GetAll = async (userId)=>{
     try{
         // get post
