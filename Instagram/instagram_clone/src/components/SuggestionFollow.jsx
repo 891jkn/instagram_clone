@@ -1,8 +1,23 @@
-import React from 'react'
+import React ,{useEffect}from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { GetFollowingSuggest } from '../API/FriendAPI'
+import { updateFollowing } from '../features/HomeReducer'
 import userimg from '../images/user.png'
 import InforBar from './InforBar'
 import InfoToast from './ToastInfo'
 function SuggestionFollow() {
+    const DIR = useDispatch()
+    const homeReducer = useSelector((state)=>state.homeReducer)
+    
+    useEffect(async() => {
+    
+        let followingSuggestion = async()=>{
+            return await GetFollowingSuggest(localStorage.getItem("instagram_user_id"))
+        }
+        let result = await followingSuggestion();
+        console.log(result.data)
+        DIR(updateFollowing(result.data))
+    }, [])
     let infoBarProps = {
         username:{
             font_size:'xs',
@@ -21,18 +36,19 @@ function SuggestionFollow() {
             link:'Follow'
         }
     }
-    let listSuggestion = [1,2,3,4,5,6,7]
     return (
         <>
+        
         <div className='flex flex-row justify-between my-4'>
             <h4 className='text-sm font-semibold text-gray-500'>Suggestion for you</h4>
             <a className='text-gray-600 text-sm font-semibold'>See all</a>
         </div>
         <ul className='flex flex-col pl-2'>
-            {listSuggestion.map((val,index)=>{
+            {homeReducer.values.followings.map((val,index)=>{
                 return (
+                   
                     <li key={index}>
-                        <InforBar userInfo={{...infoBarProps,id:val}}  toastInfo={true}/>
+                        <InforBar userInfo={{...infoBarProps,id:val}}  toastInfo={true} suggests = {true} user={val}/>
                     </li>
                 )
             })}

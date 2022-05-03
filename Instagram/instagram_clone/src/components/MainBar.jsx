@@ -30,19 +30,21 @@ function MainBar() {
     }
 
     if(userId !== null){
-      DIR(setLoading(true))
-      let user = await fetchUser()
-      let posts = await fetchPosts(userId,currentPage)
-      if(posts.length > 0 && !nothing){
-        let allPost = homeReducer.values.posts.push(posts)
-        console.log(allPost)
-        DIR(updateUserAndPostAndHideLoading({user:user,posts:allPost,isLoading:false,isUpdate:false}))
-        setFetching(false)
-      }else{
+        DIR(setLoading(true))
+        let user = await fetchUser()
+        let posts = await fetchPosts(userId,currentPage)
+        if(posts.length > 0 && !nothing){
+            let allPosts = [...homeReducer.values.posts]
+            posts.forEach((val,index)=>{
+              allPosts.push(val)
+            })
+            DIR(updateUserAndPostAndHideLoading({user:user,posts:allPosts,isLoading:false,isUpdate:false}))
           setFetching(false)
-          setNothing(c=>true)
-          DIR(setLoading(false))
-      }
+        }else{
+            setFetching(false)
+            setNothing(c=>true)
+            DIR(setLoading(false))
+        }
     }
   },[homeReducer.values.isUpdate])
   const handleScrollToLoadPage  = async(e)=>{
