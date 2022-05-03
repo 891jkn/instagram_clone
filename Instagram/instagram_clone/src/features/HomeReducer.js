@@ -6,6 +6,7 @@ const initState = {
            user_name:'default',
            nickname:'default'
        },
+       followings:[],
         isUpdate:false,
         isLoading:false
    }
@@ -14,6 +15,9 @@ const homeReducer = createSlice({
     name:'homeReducer',
     initialState:initState,
     reducers:{
+        updateFollowing:(state,action)=>{
+            state.values.followings = action.payload;
+        },
         defaultAction:(state,action)=>{
             state = action.payload
         },
@@ -52,5 +56,5 @@ const homeReducer = createSlice({
         }
     }
 })
-export const {defaultAction,updatePosts,updateUser,setUpdate,setLoading,clearState,clearStateAndShowLoading,updateUserAndPostAndHideLoading,updatePostsAndIsUpdate} = homeReducer.actions
+export const {updateFollowing,defaultAction,updatePosts,updateUser,setUpdate,setLoading,clearState,clearStateAndShowLoading,updateUserAndPostAndHideLoading,updatePostsAndIsUpdate} = homeReducer.actions
 export default homeReducer.reducer
