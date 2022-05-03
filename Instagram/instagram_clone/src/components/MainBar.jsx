@@ -4,7 +4,15 @@ import Stories from './Stories'
 import '../css/main_bar.css'
 import  PaginatePostLoading from './PaginatePostLoading'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearStateAndShowLoading, setLoading, setUpdate, updatePosts, updatePostsAndIsUpdate, updateUserAndPostAndHideLoading} from '../features/HomeReducer'
+import {
+    clearStateAndShowLoading,
+    setHideLoadingAndUpdate,
+    setLoading,
+    setUpdate,
+    updatePosts,
+    updatePostsAndIsUpdate, updateUser,
+    updateUserAndPostAndHideLoading
+} from '../features/HomeReducer'
 import { GetAllPost } from '../API/PostAPI'
 import { GetUserAPI } from '../API/AccountAPI'
 function MainBar() {
@@ -30,20 +38,24 @@ function MainBar() {
     }
 
     if(userId !== null){
+
         DIR(setLoading(true))
         let user = await fetchUser()
         let posts = await fetchPosts(userId,currentPage)
+        if (user){
+            DIR(updateUser(user))
+        }
         if(posts.length > 0 && !nothing){
             let allPosts = [...homeReducer.values.posts]
             posts.forEach((val,index)=>{
-              allPosts.push(val)
+                allPosts.push(val)
             })
             DIR(updateUserAndPostAndHideLoading({user:user,posts:allPosts,isLoading:false,isUpdate:false}))
-          setFetching(false)
+            setFetching(false)
         }else{
             setFetching(false)
             setNothing(c=>true)
-            DIR(setLoading(false))
+            DIR(setHideLoadingAndUpdate({isLoading:false,isUpdate:false}))
         }
     }
   },[homeReducer.values.isUpdate])

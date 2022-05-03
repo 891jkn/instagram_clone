@@ -48,13 +48,19 @@ const homeReducer = createSlice({
             state.values.user = new_payload.user
             state.values.isLoading = new_payload.isLoading
             state.values.isUpdate = new_payload.isUpdate
+            console.log(state.values.posts)
         },
         updatePostsAndIsUpdate:(state,action)=>{
             let new_payload = {...action.payload}
             state.values.posts = new_payload.posts
             state.values.isUpdate = new_payload.isUpdate            
+        },
+        setHideLoadingAndUpdate:(state,action)=>{
+            let new_payload = {...action.payload}
+            state.values.isUpdate = new_payload.isUpdate
+            state.values.isLoading = new_payload.isLoading
         }
     }
 })
-export const {updateFollowing,defaultAction,updatePosts,updateUser,setUpdate,setLoading,clearState,clearStateAndShowLoading,updateUserAndPostAndHideLoading,updatePostsAndIsUpdate} = homeReducer.actions
+export const {updateFollowing,setHideLoadingAndUpdate,updatePosts,updateUser,setUpdate,setLoading,clearState,clearStateAndShowLoading,updateUserAndPostAndHideLoading,updatePostsAndIsUpdate} = homeReducer.actions
 export default homeReducer.reducer
