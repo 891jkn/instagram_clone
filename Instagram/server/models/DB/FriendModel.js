@@ -1,4 +1,6 @@
+import { UserModel } from "../EF/User.js";
 import { FriendModel } from "../EF/UserFriend.js";
+import { GetFriends } from "./PostModel.js";
 
 export const AddFriend = async (userId,friendId)=>{
     try{
@@ -42,4 +44,37 @@ export const RemoveFriend = async (userId,friendId)=>{
     }catch(err){
         return "something err";
     }
+}
+export const GetFollowers = async(userId)=>{
+    return await FriendModel.find({userId:userId}).exec()
+}
+export const GetFollowingSuggestions = async(userId)=>{
+
+    try{
+
+        let friends = await GetFriends(userId)
+        let count = 0;
+        let limit = 6;
+        let SuggestFollow = []   
+        if(friends){
+          
+            for(let i = 0 ; i < friends.length; i ++){
+                let followings = await GetFollowers(friends[i].friendId);
+                SuggestFollow = [...SuggestFollow,...followings]
+            }
+            let noFriends = SuggestFollow.filter((val)=>{
+                return val.friendId !== userId
+            })
+            let result = []            
+            for(let i = 0 ; i < noFriends.length ; i++){
+                let user = await UserModel.findOne({userId:noFriends[i].userId}).exec()
+                result.push(user)
+            }
+            SuggestFollow = result;
+        }
+        return {data:SuggestFollow}
+    }catch(err){
+        console.log({err:err})
+    }
+
 }

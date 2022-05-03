@@ -11,7 +11,7 @@ import { SearchAPI } from "../API/SearchAPI";
 import {setResult} from '../features/SearchReducer'
 const Navbar =  ()=>{
   const navItems = [
-    {id:1,content:'fa-house',to:'',handleClick:function(){setActive(1)}},
+    {id:1,content:'fa-house',to:'/',handleClick:function(){setActive(1)}},
     {id:2,content:'fa-comment-dots',to:'',handleClick:function(){setActive(2)}},
     {id:3,content:'fa-square-plus',to:'',handleClick:function(){setActive(3);setOpenCreatePost(true)}},
     {id:4,content:'fa-compass',to:'',handleClick:function(){setActive(4)}},
