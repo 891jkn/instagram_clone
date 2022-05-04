@@ -35,25 +35,19 @@ export default function User() {
     }
 
     // fetch user and update to store
-
     useEffect(async()=>{
+        // user
         DIR(clearProfile({user:{},posts:[]}))
         let profile = await fetchUser()
         DIR(UpdateUserProfile(profile.user))
-        setLoading(false)
-    },[userId])
 
-    // fetch post and update
-    useEffect(async ()=>{
-        console.log('fetch post when userid change')
-        console.log("has post",userProfileReducer.values.posts)
-        let profile = await  fetchUser()
+        // posts
+
+
         let fetchedPost = Object.values(profile.posts)
-        let hasPost = [...userProfileReducer.values.posts]
-        console.log("fetchPost",fetchedPost)
-
+        let hasPost = []
         if (fetchedPost && fetchedPost.length > 0){
-            console.log('here')
+
             if (hasPost && hasPost.length > 0){
                 for (let i = 0 ; i < fetchedPost.length ; i++){
                     for (let j = 0 ; j < hasPost.length ; j ++){
@@ -76,7 +70,7 @@ export default function User() {
     },[userId,currentPage])
     return (
         <>
-            {console.log("final : ",userProfileReducer.values)}
+            {console.log('re-ren')}
             <Navbar/>
             <section className="user">
                 {loading && <UserProfileLoading/>}
