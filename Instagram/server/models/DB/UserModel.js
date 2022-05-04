@@ -8,7 +8,6 @@ export const GetUserById = async(id)=>{
     try{
         let user =  await UserModel.findOne({_id:id}).exec()
         let media = await MediaModel.findOne({relationId:'USER'+id})
-        console.log(user)
         if(user!==null){
             let newUser = {
                 id:user._id.toString(),

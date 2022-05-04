@@ -19,6 +19,7 @@ function Posts({fetching,nothing}) {
       <div className="posts-container space-y-5 relative">
       {homeReducer.values.isLoading &&
       <PureLoading/> }
+          {console.log(homeReducer.values.posts)}
         {homeReducer.values.posts.map((val, index) => {
             return <ImagePost post={val} key={index} />;
         })}

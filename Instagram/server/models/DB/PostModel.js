@@ -99,13 +99,14 @@ export const GetPostByPage  = async (userId,page,limit)=>{
                             comments.unshift(comment)
                         }
                         let postUser = await GetUserById(posts[i].userId)
-                        // create data return 
+                        // create data return
+                        // return  media
                         let post = {
                             caption:posts[i].caption,
                             userId:posts[i].userId,
                             _id:posts[i]._id.toString(),
                             media:{
-                                _id:media._id.toString(),
+                                _id:(media._id.toString() || null),
                                 relationId:media.relationId,
                                 path:media.path
                             },
@@ -123,7 +124,11 @@ export const GetPostByPage  = async (userId,page,limit)=>{
                     postOfFollowings.push(...postHasMedia)
                 }
             }
-        }
+        }// get posts of following
+
+
+        // get post of user
+
         return postOfFollowings;
     }catch(err){
         console.log(err)
@@ -154,7 +159,7 @@ export const GetAll = async (userId)=>{
                 let comment = {id:commentsNoUser[i]._id.toString(),content:commentsNoUser[i].content,parentId:commentsNoUser[i].parentId,user:user}
                 comments.unshift(comment)
             }
-            // create data return 
+            // create data return
             let post = {
                 caption:selfPostNoMedia[i].caption,
                 userId:selfPostNoMedia[i].userId,
@@ -192,7 +197,7 @@ export const GetAll = async (userId)=>{
         console.log(err)
         return 'Something err...'
     }
-    
+
 }
 
 export const RemovePost = async(postId)=>{
