@@ -25,6 +25,7 @@ const homeReducer = createSlice({
             state.values.posts = action.payload
         },
         updateUser:(state,action)=>{
+            console.log(action.payload)
             state.values.user = action.payload
         },
         setUpdate :(state,action)=>{

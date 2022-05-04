@@ -1,11 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit'
 import { updatePosts } from './HomeReducer';
 const initState = {
-   values:{
-      posts:[],
-      user:{haveFriend:false},
-      tagged:[],
-      saved:[],
+    values:{
+        posts:[],
+        postCount:0,
+        user:{haveFriend:false},
+        tagged:[],
+        saved:[],
    }
 }
 const userProfileReducer = createSlice({
@@ -15,7 +16,7 @@ const userProfileReducer = createSlice({
         UpdatePost:(state,action)=>{
             state.values.posts = action.payload;
         },
-        UpdateUser :(state,action)=>{
+        UpdateUserProfile :(state,action)=>{
             state.values.user = action.payload;
         },
         UpdateTagged : (state,action)=>{
@@ -28,9 +29,20 @@ const userProfileReducer = createSlice({
             let new_payload = {...action.payload}
             state.values.posts = new_payload.posts
             state.values.user = {...initState,...new_payload.user}
+            state.values.postCount = new_payload.postCount
         },
+        UpdatePostAndPostCount:(state,action)=>{
+            let new_payload = {...action.payload}
+            state.values.posts = new_payload.posts
+            state.values.postCount = new_payload.postCount
+        },
+        clearProfile:(state,action)=>{
+            let new_payload = {...action.payload}
+            state.values.user = new_payload.user
+            state.values.posts = new_payload.posts
+        }
 
     }
 })
-export const {UpdatePost,UpdateSaved,UpdateUser,UpdateTagged,UpdatePostAndUser} = userProfileReducer.actions
+export const {UpdatePost,UpdateSaved,UpdateUserProfile,UpdateTagged,UpdatePostAndUser,clearProfile,UpdatePostAndPostCount} = userProfileReducer.actions
 export default userProfileReducer.reducer

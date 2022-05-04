@@ -61,6 +61,14 @@ export const GetUserFollower = async (userId)=>{
     let friends = await FriendModel.find({friendId:userId}).count().exec();
     return friends;
 }
+export const GetPostCountByUserId = async(userId)=>{
+    try{
+        return await PostModel.find({userId:userId}).count().exec()
+    }catch (err){
+        console.log(err)
+        return "Something err"
+    }
+}
 export const GetUserProfileByPage = async(userId,currentUserId,page,limit)=>{
     try{
         let haveFriend = false;
@@ -72,11 +80,12 @@ export const GetUserProfileByPage = async(userId,currentUserId,page,limit)=>{
         }
         let user = await GetUserById(userId)
         let posts = await GetUserPostByPage(userId,page,limit)
+        let allPostCount = await GetPostCountByUserId(userId)
         user.following = await GetUserFollowing(userId);
         user.follower = await GetUserFollower(userId);
         user.haveFriend = haveFriend;
         if(user && posts){
-            let userProfile ={user:{...user},posts:{...posts}||[]}
+            let userProfile ={user:{...user},posts:{...posts},postCount:allPostCount||[]}
             return userProfile
         }
         return []

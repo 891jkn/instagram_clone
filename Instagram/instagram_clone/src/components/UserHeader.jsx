@@ -5,7 +5,7 @@ import { Follow, UnFollow } from '../API/UserProfileAPI'
 export default function UserHeader() {
   const userProfileReducer = useSelector((state)=>state.userProfileReducer)
   let user = userProfileReducer.values.user
-  let postCounts = userProfileReducer.values.posts.length || 0
+  let postCounts = userProfileReducer.values.postCount || 0
   const [isFollowed,setIsFollowed] = useState(userProfileReducer.values.user.haveFriend)
   useEffect(() => {
     setIsFollowed(userProfileReducer.values.user.haveFriend)
