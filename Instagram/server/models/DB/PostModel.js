@@ -7,6 +7,7 @@ import { GetUserById } from "./UserModel.js";
 import {LikeModel} from '../EF/Like.js'
 import {CommentModel} from '../EF/Comment.js'
 import { CreatePostComment } from "./CommentModel.js";
+import {SavedModel} from "../EF/Saved.js";
 export const GetPostsOfFriend = async(userId)=>{
     try{
         const friendsId = await GetFriends(userId);
@@ -88,11 +89,14 @@ export const GetPostByPage  = async (userId,page,limit)=>{
                         let media = await MediaModel.findOne({relationId:'POST'+posts[i]._id.toString()}).exec()
                         // get like count
                         const likes = await LikeModel.find({postId:posts[i]._id,isLike:true}).count().exec()
+                        // check has like post
                         const hasLike = await LikeModel.findOne({postId:posts[i]._id.toString(),userId:userId,isLike:true}).exec()
                         // get comment each post
                         const commentsNoUser = await CommentModel.find({postId:posts[i]._id,parentId:0}).sort({createdAt:-1}).limit(3).exec()
                         const comments = []
                         const totalComment = await CommentModel.find({postId:posts[i]._id}).count().exec()
+                        // check has saved post
+                        const hasSaved = await SavedModel.findOne({postId:posts[i]._id.toString(),userId:userId})
                         for(let i = 0 ; i < commentsNoUser.length ; i++){
                             let user =  await GetUserById(commentsNoUser[i].userId)
                             let comment = {id:commentsNoUser[i]._id.toString(),content:commentsNoUser[i].content,parentId:commentsNoUser[i].parentId,user:user}
@@ -113,6 +117,7 @@ export const GetPostByPage  = async (userId,page,limit)=>{
                             user:postUser,
                             likes:likes,
                             hasLike:hasLike !== null ? true : false,
+                            hasSaved:hasSaved !== null ? true :false,
                             comments:comments,
                             createdAt:posts[i].createdAt,
                             updatedAt:posts[i].updatedAt,

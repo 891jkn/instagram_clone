@@ -15,6 +15,7 @@ import {
 } from '../features/HomeReducer'
 import { GetAllPost } from '../API/PostAPI'
 import { GetUserAPI } from '../API/AccountAPI'
+import post from "./Post";
 function MainBar() {
   const homeReducer = useSelector((state)=>state.homeReducer)
   const [fetching,setFetching]  = useState(false)
@@ -47,9 +48,20 @@ function MainBar() {
         }
         if(posts.length > 0 && !nothing){
             let allPosts = [...homeReducer.values.posts]
-            posts.forEach((val,index)=>{
-                allPosts.push(val)
-            })
+            if(allPosts.length > 0){
+                for (let i = 0 ; i < posts.length ; i++){
+                    for (let j = 0 ; j < allPosts.length ; j ++){
+                        if (posts[i].id !== allPosts[j].id){
+                            allPosts.push(posts[i])
+                            break
+                        }
+                    }
+                }
+            }else{
+                for (let i = 0 ; i < posts.length ; i++){
+                    allPosts.push(posts[i])
+                }
+            }
             DIR(updateUserAndPostAndHideLoading({user:user,posts:allPosts,isLoading:false,isUpdate:false}))
             setFetching(false)
         }else{

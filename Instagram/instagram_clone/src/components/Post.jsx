@@ -1,5 +1,5 @@
 import React ,{useState} from 'react'
-import { CreateComment, Like, Unlike } from '../API/PostAPI';
+import { CreateComment, Like, Unlike ,Saved,UnSaved} from '../API/PostAPI';
 import defaultUserAvatar from "../images/user.png";
 import defaultImagePost from "../images/post_images/vivian_3_15_2020.jpg";
 import InfoToast from "./ToastInfo";
@@ -16,7 +16,8 @@ const ImagePost = ({post}) => {
     const [comments,setComments] = useState(post.comments)
     const [commentContent,setCommentContent] = useState('')
     const [likes,setLikes] = useState(post.likes)
-    const [isLike,setIsLike] = useState(post.hasLike)
+    const [isLike,setIsLike] = useState(post.hasLike) // get like in server
+    const [isSaved,setIsSaved] = useState(post.hasSaved) // get saved in server
     const [showOverlay, setShowOverlay] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const homeReducer = useSelector((state)=>state.homeReducer)
@@ -123,11 +124,18 @@ const ImagePost = ({post}) => {
     const handleLike = async()=>{
       setLikes(likes+1)
       const result = await Like(localStorage.getItem('instagram_user_id'),post._id)
-     
     }
     const handleUnlike = async()=>{
         setLikes(likes>=1? likes-1 : likes)
         const result = await Unlike(localStorage.getItem('instagram_user_id'),post._id)
+    }
+    const handleSaved = async()=>{
+        setIsSaved(true)
+        await Saved(localStorage.getItem('instagram_user_id'),post._id)
+    }
+    const hanldeUnSaved = async ()=>{
+        setIsSaved(false)
+        await UnSaved(localStorage.getItem('instagram_user_id'),post._id)
     }
     // post action cpn
     const PostActionIcon = ()=>{
@@ -143,7 +151,9 @@ const ImagePost = ({post}) => {
             <i className="fa-solid text-2xl fa-share cursor-pointer hover:text-gray-500"></i>
           </div>
           <div>
-            <i className="fa-regular text-2xl fa-bookmark  cursor-pointer hover:text-gray-500"></i>
+            <i className={` ${!isSaved ? 'fa-regular' : 'fa-solid'} text-2xl fa-bookmark  cursor-pointer hover:text-gray-500`} onClick={()=>{
+                isSaved ? hanldeUnSaved() : handleSaved()
+            }}></i>
           </div>
         </div>
       )

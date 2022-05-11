@@ -10,6 +10,7 @@ import PostRoute from './routes/Post.js'
 import SearchRoute from './routes/Search.js'
 import UserRoute from './routes/User.js'
 import FriendRoute from './routes/Friend.js'
+import SavedRoute from "./routes/Saved.js";
 // gioi han server truyen tai khoang 30mb
 app.use(bodyParser.json({limit:"30mb"}))
 app.use(bodyParser.urlencoded({extended:true,limit:'30mb'}))
@@ -22,6 +23,7 @@ app.use('/post',PostRoute)
 app.use('/search',SearchRoute)
 app.use('/user',UserRoute)
 app.use('/friend',FriendRoute)
+app.use('/saved',SavedRoute)
 // connect to database 
 
 const uri = 'mongodb+srv://khanhdaica:13122002@cluster0.eqs73.mongodb.net/instagram_clone?retryWrites=true&w=majority'

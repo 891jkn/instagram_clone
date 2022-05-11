@@ -25,7 +25,6 @@ const homeReducer = createSlice({
             state.values.posts = action.payload
         },
         updateUser:(state,action)=>{
-            console.log(action.payload)
             state.values.user = action.payload
         },
         setUpdate :(state,action)=>{
@@ -49,7 +48,6 @@ const homeReducer = createSlice({
             state.values.user = new_payload.user
             state.values.isLoading = new_payload.isLoading
             state.values.isUpdate = new_payload.isUpdate
-            console.log(state.values.posts)
         },
         updatePostsAndIsUpdate:(state,action)=>{
             let new_payload = {...action.payload}

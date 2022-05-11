@@ -15,7 +15,6 @@ function SuggestionFollow() {
             return await GetFollowingSuggest(localStorage.getItem("instagram_user_id"))
         }
         let result = await followingSuggestion();
-        console.log(result.data)
         DIR(updateFollowing(result.data))
     }, [])
     let infoBarProps = {

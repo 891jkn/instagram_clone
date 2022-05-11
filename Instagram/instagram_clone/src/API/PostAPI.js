@@ -28,3 +28,13 @@ export const CreateComment = async(userId,postId,content,parent)=>{
         return res.data
     }).catch(err=>err)
 }
+export const Saved = async (userId,postId)=>{
+    return await axios.post(`${URL}/saved/create`,{userId:userId,postId:postId}).then((res)=>{
+        return res.data
+    }).catch(err=>err)
+}
+export const UnSaved = async (userId,postId)=>{
+    return await axios.post(`${URL}/saved/delete`,{userId:userId,postId:postId}).then((res)=>{
+        return res.data
+    }).catch(err=>err)
+}
